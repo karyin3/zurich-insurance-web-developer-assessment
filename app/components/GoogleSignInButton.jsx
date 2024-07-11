@@ -2,9 +2,9 @@
 
 import { signIn } from "next-auth/react";
 
-const GoogleSignInButton = () => {
+const GoogleSignInButton = ({ baseUrl }) => {
   const handleClick = () => {
-    signIn("google", { callbackUrl: `${process.env.BASE_URL}/users` });
+    signIn("google", { callbackUrl: `${baseUrl}/users` });
   };
 
   return (
