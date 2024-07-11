@@ -4,10 +4,10 @@ import Header from "../app/components/Header";
 import { renderWithProviders } from "../app/util/testUtils";
 
 describe("Header", () => {
-  it("does not render email in header component when user is not signed in", () => {
+  it("does not render signout button in header component when user is not signed in", () => {
     renderWithProviders(<Header />);
-    const email = screen.queryByText("Signed in");
-    expect(email).toBeNull();
+    const signout = screen.queryByText("Sign Out");
+    expect(signout).toBeNull();
   });
 
   it("renders name and email in header component when user is signed in", () => {
@@ -18,17 +18,19 @@ describe("Header", () => {
         image: "test-image"
       }
     };
-    
+
     renderWithProviders(<Header />, {
       preloadedState: {
         auth: mockAuthState
       }
     });
 
-    const email = screen.getByText(mockAuthState.user.email, { exact: false })
-    const username = screen.getByText(mockAuthState.user.name, { exact: false });
-    
-    expect(email).toBeInTheDocument();
+    const signout = screen.getByTestId("sign-out");
+    const username = screen.getByText(mockAuthState.user.name, {
+      exact: false
+    });
+
+    expect(signout).toBeInTheDocument();
     expect(username).toBeInTheDocument();
   });
 });
