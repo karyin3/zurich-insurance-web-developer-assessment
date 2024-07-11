@@ -15,7 +15,7 @@ const Header = () => {
             Hello, {name ? name : "Welcome to Zurich Insurance Customer Portal"}
             !
           </p>
-          {email && <p>(Signed in with {email})</p>}
+          {email && <p data-testid="header-email">(Signed in with {email})</p>}
         </div>
         <Image src={ZurichLogo} alt="logo" className="h-10 w-40" />
       </div>

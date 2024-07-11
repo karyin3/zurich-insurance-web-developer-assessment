@@ -1,5 +1,5 @@
-import ToggleEmailVisibility from "./ToggleEmailVisibility";
-import Card from "./Card";
+import ToggleEmailVisibility from "../../components/ToggleEmailVisibility";
+import Card from "../../components/Card";
 
 const UsersListItem = ({ user }) => {
   return (
