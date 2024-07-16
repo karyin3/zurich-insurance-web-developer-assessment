@@ -8,7 +8,6 @@ const fetchData = async (url, pageNum = 1) => {
 
 export const fetchAllDataRecursive = async (url, pageNum = 1) => {
   const results = await fetchData(url, pageNum);
-  console.log(results);
   const { page, total_pages, data } = results;
 
   if (page < total_pages) {
