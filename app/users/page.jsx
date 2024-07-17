@@ -9,7 +9,11 @@ const UsersPage = async () => {
     return <UnauthorisedUserError />;
   }
 
-  return <UsersList />;
+  const res = await fetch(`${process.env.BASE_URL}/api/users`).then(res =>
+    res.json()
+  );
+
+  return <UsersList users={res.data} />;
 };
 
 export default UsersPage;

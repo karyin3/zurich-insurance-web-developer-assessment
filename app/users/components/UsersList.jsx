@@ -1,8 +1,18 @@
+"use client";
+
+import { useEffect } from "react";
 import UsersListItem from "./UsersListItem";
-import { fetchAllDataRecursive } from "../../util/fetchData";
+import { useAppDispatch, useAppSelector } from "../../../lib/hooks";
+import { setUsers } from "../../../lib/features/users/usersSlice";
 import { filterData } from "../../util/filterData";
 
-const UsersList = async () => {
+const UsersList = ({ users }) => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setUsers(users));
+  }, [dispatch, users]);
+
   const filterCriteria = user => {
     return (
       user.first_name.toLowerCase().startsWith("g") ||
@@ -11,12 +21,15 @@ const UsersList = async () => {
   };
 
   const usersList = filterData(
-    await fetchAllDataRecursive("https://reqres.in/api/users"),
+    useAppSelector(state => state.users),
     filterCriteria
   );
 
   return (
-    <div data-testid="users-list" className="container mx-auto my-8 flex flex-grow flex-col">
+    <div
+      data-testid="users-list"
+      className="container mx-auto my-8 flex flex-grow flex-col"
+    >
       {usersList.map(user => (
         <UsersListItem key={user.id} user={user} />
       ))}
